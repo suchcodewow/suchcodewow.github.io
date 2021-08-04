@@ -2,6 +2,7 @@
 title: Step 1 (Pick 1)
 description: How to host it?
 has_children: yes
+parent: Kubernetes & Dynatrace Workshop
 ---
 
 ### Need help choosing?

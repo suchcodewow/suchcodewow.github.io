@@ -2,6 +2,7 @@
 title: Bring Your Own Host
 description:
 parent: Step 1 (Pick 1)
+grand_parent: Kubernetes & Dynatrace Workshop
 ---
 
 ### Ensure your host meets these prerequisites

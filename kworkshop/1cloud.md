@@ -2,6 +2,7 @@
 title: Cloud Hosted
 description: 
 parent: Step 1 (Pick 1)
+grand_parent: Kubernetes & Dynatrace Workshop
 ---
 
 What a magical place the cloud!

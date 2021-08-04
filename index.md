@@ -4,4 +4,4 @@
 title: Index
 description: k3s workshops
 ---
-[K3s Workshop](./k3sworkshop.html)
+[K3s Workshop](./kworkshop)

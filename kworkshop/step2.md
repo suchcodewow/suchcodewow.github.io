@@ -2,6 +2,7 @@
 title: Step 2 (Pick 1)
 description: What flavor of Kubernetes?
 has_children: yes
+parent: Kubernetes & Dynatrace Workshop
 ---
 
 ### Need help choosing?

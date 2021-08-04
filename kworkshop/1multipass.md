@@ -2,6 +2,7 @@
 title: Multipass
 description: Step 1 Multipass
 parent: Step 1 (Pick 1)
+grand_parent: Kubernetes & Dynatrace Workshop
 ---
 
 ## Multipass
