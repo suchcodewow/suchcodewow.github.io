@@ -1,0 +1,36 @@
+img {
+    border: 2px solid #555;
+    border-radius: 10px;
+}
+blockquote {
+    border-left: 2px solid rgb(80, 118, 175);
+    margin: 1.5em 60px;
+    padding: 0em 5px;
+  }
+blockquote p {
+    display: inline;
+  }
+code {
+      font-size: 1em;
+
+}
+code::before {
+    content: "# ";
+    color:rgb(36, 206, 65)
+}
+div.highlighter-rouge {
+      margin: 20px;
+      border-radius: 12px;
+}
+pre.highlight > button {
+    opacity: 0;
+}
+  
+pre.highlight:hover > button {
+    opacity: 1;
+}
+  
+pre.highlight > button:active,
+pre.highlight > button:focus {
+    opacity: 1;
+}
