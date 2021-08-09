@@ -5,7 +5,11 @@ has_children: yes
 parent: Kubernetes & Dynatrace Workshop
 ---
 
-### Need help choosing?
+## Step 1
+
+Get your server ready!
+
+## Need help choosing?
 
 **Multipass** is a flexible, quick, easy option if you have a modern PC.
 

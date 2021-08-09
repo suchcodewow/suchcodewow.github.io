@@ -4,6 +4,8 @@ description: What flavor of Kubernetes?
 has_children: yes
 parent: Kubernetes & Dynatrace Workshop
 ---
+## Step 2
+Install Kubernetes!
 
 ### Need help choosing?
 

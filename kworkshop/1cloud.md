@@ -35,9 +35,9 @@ For maximum bowl building compatibility, select:
 
 Persistent storage is not required for a short term workshop.
 
-### Connect and next steps
+### Next Steps
 
-Login with your password or SSH key.  If successful, Congratulations!  You've completed step 1.  Check out next steps in building your bowl [here](./step2).
+Please jump down to **Finishing Up** below.
 
 ## AWS
 
@@ -55,8 +55,25 @@ Select launch instance.
 
 Select a server size with 2+ vcpu and 4GB+ memory, review, and launch.
 
-### Log in to your new EC2 instance
-If you can log in to your new EC2 instance, Congratulations!  You've completed step 1.  Check out next steps in building your bowl [here](./step2).
+### Next Steps
+
+Please jump down to **Finishing Up** below.
+
+## Finishing up
+
+### Add the server's IP address to your hosts file
+
+Open your hosts file and add *rancher.localdev* with the IP.  (Replace x's with your ubuntu server's IP address.)
+
+Hosts file example:
+
+>192.168.1.1 server1  
+>192.168.1.2 server2  
+>**192.168.x.x rancher.localdev**
+
+### Confirm login & choose your next ingredient
+
+If you can log in to your new host, Congratulations!  You've completed step 1.  Check out next steps in building your bowl [here](./step2).
 
 ## Recyling your bowl
 

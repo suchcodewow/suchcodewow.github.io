@@ -1,6 +1,12 @@
-img {
+img :not(.emoji){
     border: 2px solid #555;
     border-radius: 10px;
+}
+div > p {
+    margin: 1.5em;
+}
+div.table-wrapper {
+    margin: 1.5em;
 }
 blockquote {
     border-left: 2px solid rgb(80, 118, 175);
@@ -15,7 +21,7 @@ code {
 
 }
 code::before {
-    content: "# ";
+    content: "$ ";
     color:rgb(36, 206, 65)
 }
 div.highlighter-rouge {
