@@ -12,6 +12,7 @@ No matter which path you take, you'll end up with:
 - a production-grade platform with minimal dependencies
 - a solid understanding of what makes up kubernetes & common technologies
 - multiple options for real-world scenarios that showcase Dynatrace
+
 ![bowl overview](../assets/images/bowl.png)
 
 ### Using this workshop
@@ -19,10 +20,10 @@ No matter which path you take, you'll end up with:
 There are a few common mechanics used throughout the workshop.
 
 ```bash
-code blocks are meant to be typed (or hover to copy)
+code blocks are meant to be typed (or hover for copy button)
 and pasted into your command line.
 Except this one.  I mean, you CAN copy this block,
-but there is no point.
+but there is no point. So best to scroll by.
 You know what... you do you.  Copy away if it brightens your day.
 ```
 

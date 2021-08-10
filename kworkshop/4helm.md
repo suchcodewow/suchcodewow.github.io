@@ -27,5 +27,6 @@ and take a quick break to stretch and exercise while you wait for a SUCCESS mess
 
 ### Next Steps
 
-If Dynatrace installed successfully- perfect!  That's all it takes to add intelligent, A.I. driven observability within kubernetes for any number of technologies or applications deployed within.  Dynatrace will automatically add monitoring to anything that starts up and gracefully remove monitoring when the resource shuts down.  
+If Dynatrace installed successfully- perfect!  That's all it takes to add intelligent, A.I. driven observability in kubernetes.  Dynatrace will automatically add monitoring to anything that starts up and gracefully remove monitoring when the resource shuts down.  
+
 With your Dyntrace-empowered Kubernetes installation, try out topping off your bowl with one of the examples in [step 5](step5)!

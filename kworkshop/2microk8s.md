@@ -24,7 +24,8 @@ sudo snap install microk8s --classic
 > The command above installs microK8s.
 
 ### :checkered_flag: CHECKPOINT
-Run `sudo microk8s kubectl get nodes` and ensure you see a 'ready' response for your control-plane.  If you get an error, it's typically a miss on on exporting the KUBECONFIG environment variable.  
+
+Run `sudo microk8s kubectl get nodes` and hang tight until you see a 'ready' response for your control-plane.
 
 ### Create namespaces
 

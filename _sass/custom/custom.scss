@@ -1,6 +1,9 @@
-img :not(.emoji){
+img:not(.emoji) {
     border: 2px solid #555;
     border-radius: 10px;
+    -moz-box-shadow: 1px 1px 5px #999;
+    -webkit-box-shadow: 1px 1px 5px #999;
+    box-shadow: 1px 1px 5px #999;
 }
 div > p {
     margin: 1.5em;
@@ -18,7 +21,12 @@ blockquote p {
   }
 code {
       font-size: 1em;
-
+      background-color: #282c34;
+      color: #abb2bf;
+}
+div.highlight {
+    background-color: #282c34;
+    margin: 12px;
 }
 code::before {
     content: "$ ";
@@ -26,17 +34,32 @@ code::before {
 }
 div.highlighter-rouge {
       margin: 20px;
-      border-radius: 12px;
+      border-radius: 4px;
+      background-color: #282c34;
+      position: relative;
 }
-pre.highlight > button {
+pre.highlight > input {
     opacity: 0;
 }
-  
-pre.highlight:hover > button {
+
+input.copy {
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    cursor: pointer;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background-color:#8eb5fd;
+    padding: 12px 2px;
+    transition: all .3s;
+    max-height: 56px;
+}
+pre.highlight:hover > input {
     opacity: 1;
 }
   
-pre.highlight > button:active,
-pre.highlight > button:focus {
+pre.highlight > input:active,
+pre.highlight > input:focus {
     opacity: 1;
 }

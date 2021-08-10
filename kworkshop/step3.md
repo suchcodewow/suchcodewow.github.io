@@ -18,13 +18,9 @@ example:
 sudo [select distribution above] kubectl get nodes
 ```
 
-### Distribution
-
-Select your distribution
-
 ## Install Prerequisites
 
-### Install Helm.
+### Install Helm
 
 ```bash
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
@@ -88,9 +84,9 @@ helm install rancher rancher-latest/rancher \
 
 ### :checkered_flag: CHECKPOINT
 
-you can watch the deployment of Rancher with `sudo (k8s microk8s minikube) kubectl -n cow-herder rollout status deploy/rancher`.  Hang tight moving forward until it's finished.
+you can watch the deployment of Rancher with `sudo [select distribution above] kubectl -n cow-herder rollout status deploy/rancher`.  Hang tight moving forward until it's finished.
 
-Check that the ingress has been setup.  Run `sudo (k8s microk8s minikube) kubectl -n cow-herder get ingresses`.
+Check that the ingress has been setup.  Run `sudo [select distribution above] kubectl -n cow-herder get ingresses`.
 
 Look for *deployment "rancher" successfully rolled out*.
 
