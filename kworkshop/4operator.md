@@ -14,7 +14,7 @@ You'll see command line instructions on this step with multiple options dependin
 example:
 
 ```bash
-sudo [select distribution above] kubectl get nodes
+kubectl get nodes
 ```
 
 ### Deploy Dynatrace
@@ -22,13 +22,13 @@ sudo [select distribution above] kubectl get nodes
 Create a namespace for Dynatrace.
 
 ```bash
-sudo [select distribution above] kubectl create namespace dynatrace
+kubectl create namespace dynatrace
 ```
 
 Get the configuration for Dynatrace.
 
 ```bash
-sudo [select distribution above] kubectl apply -f https://github.com/Dynatrace/dynatrace-operator/releases/latest/download/kubernetes.yaml
+kubectl apply -f https://github.com/Dynatrace/dynatrace-operator/releases/latest/download/kubernetes.yaml
 ```
 
 > The **apply** command in kubernetes creates and manages resources following a yaml file.  It's a common way to add & configure a number of components at once.
@@ -36,7 +36,7 @@ sudo [select distribution above] kubectl apply -f https://github.com/Dynatrace/d
 (Optional) Watch the deployment as it progresses.
 
 ```bash
-sudo [select distribution above] kubectl -n dynatrace logs -f deployment/dynatrace-operator
+kubectl -n dynatrace logs -f deployment/dynatrace-operator
 ```
 
 > the **logs** command lets us watch the deployment as it rolls out.
@@ -46,7 +46,7 @@ sudo [select distribution above] kubectl -n dynatrace logs -f deployment/dynatra
 Once the deployment is finished- use the API_TOKEN and PAAS_TOKEN you created in the [Prerequisites](index#prerequisites) to replace the values below.
 
 ```bash
-sudo [select distribution above] kubectl -n dynatrace create secret generic dynakube --from-literal="apiToken=API_TOKEN" --from-literal="paasToken=PAAS_TOKEN"
+kubectl -n dynatrace create secret generic dynakube --from-literal="apiToken=API_TOKEN" --from-literal="paasToken=PAAS_TOKEN"
 ```
 
 > This command **creates** a new [secret](https://kubernetes.io/docs/concepts/configuration/secret/) named **dynakube** (used later!) that allows kubernetes to establish a connection to your Dyantrace tenant.
@@ -75,7 +75,7 @@ Save with *ctrl+x*, *Y* for yes, and *enter* to overwrite the template.
 Awesome!  Almost there.  Now we need to apply our customization:
 
 ```bash
-sudo [select distribution above] kubectl apply -f cr.yaml
+kubectl apply -f cr.yaml
 ```
 
 ### Next Steps
@@ -89,13 +89,13 @@ If you want to recycle this ingredient for any reason, simply follow the two ste
 Remove the component you installed.
 
 ```bash
-sudo [select distribution above] kubectl delete -n dynatrace dynakube --all
+kubectl delete -n dynatrace dynakube --all
 ```
 
 and run the delete command to reverse the apply command.
 
 ```bash
-sudo [select distribution above] kubectl delete -f https://github.com/Dynatrace/dynatrace-operator/releases/latest/download/kubernetes.yaml
+kubectl delete -f https://github.com/Dynatrace/dynatrace-operator/releases/latest/download/kubernetes.yaml
 ```
 
 <script src="{{ base.url | prepend: site.url }}/assets/js/copy.js"></script>

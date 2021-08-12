@@ -42,6 +42,9 @@ pre.highlight > input {
     opacity: 0;
 }
 
+button {
+    margin: 0px 2px;
+}
 input.copy {
     display: inline-block;
     vertical-align: middle;
@@ -53,13 +56,9 @@ input.copy {
     background-color:#8eb5fd;
     padding: 12px 2px;
     transition: all .3s;
-    max-height: 56px;
+    max-height: 64px;
 }
 pre.highlight:hover > input {
     opacity: 1;
 }
   
-pre.highlight > input:active,
-pre.highlight > input:focus {
-    opacity: 1;
-}

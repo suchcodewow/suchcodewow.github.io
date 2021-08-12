@@ -18,10 +18,11 @@ grand_parent: Kubernetes & Dynatrace Workshop
 Open a new terminal window on your computer.  Then run:
 
 ```bash
-multipass launch -c 4 -m 4G -n DTkube
+multipass launch -c 4 -m 4G -d 64GB -n DTkube
 ```
 
-> This creates an ubuntu server that can use 4 cores, 4 GB of memory, and is named DTkube.
+> This creates an ubuntu server that can use 4 cores, 4 GB of memory, and is named DTkube.  
+> The **-d 64GB** command allocates maximum hard disk size.  Multipass will only use space consumed by the ubuntu server's files & you won't actually use up 64GB of space on your computer.
 
 ### Get the IP address of your new server
 
@@ -45,7 +46,25 @@ Hosts file example:
 >192.168.1.2 server2  
 >**192.168.x.x rancher.localdev**
 
-### Choose your next ingredient
+### Log in to the server
+
+Connect to your new ubuntu server.
+
+```bash
+multipass shell DTkube
+```
+
+> Multipass automatically creates an account named *ubuntu* for you and logs in with this account automatically.  You won't need a password when using *sudo*.  
+> **sudo** is a way to preface commands in linux that elevates your permission to root (administrator) level temporarily.
+
+### (Recommended) Update your new server
+
+```bash
+sudo apt-get update -y
+sudo apt upgrade -y
+```
+
+## Choose your next ingredient
 
 Congratulations!  You've completed step 1.  Check out next steps in building your bowl [here](./step2).
 

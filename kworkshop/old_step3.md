@@ -2,6 +2,7 @@
 title: Step 3 (Rancher)
 description: Install Rancher
 parent: Kubernetes & Dynatrace Workshop
+nav_exclude: true
 ---
 
 ## Install Rancher
@@ -20,6 +21,18 @@ kubectl create ns cow-herder
 ### :checkered_flag: CHECKPOINT
 
 Take a moment to revel in the glory of your organization with `kubectl get ns` to see the spaces you've setup.  You'll see several system-generated namespaces in there along with the ones you've created.
+
+### :exclamation: Important Note
+
+You'll see command line instructions on this step with multiple options depending on which kubernetes you picked in the previous step.  Select your distribution below:  
+
+example:
+
+```bash
+kubectl get nodes
+```
+
+## Install Prerequisites
 
 ### Install Helm
 
@@ -66,23 +79,16 @@ cert-manager jetstack/cert-manager \
 
 ### :checkered_flag: CHECKPOINT
 
-Confirm it worked.
+Confirm it worked with `kubectl get pods -n cert-manager`.  Looking for a *running* status.
 
-```bash
-kubectl get pods -n cert-manager
-```
+>- It might take a bit for Helm to deploy everything.
+>- If you see an error message or if your computer spontaneously catches fire... there is a chance something went wrong.  *SuchCodeWow and its affiliates are not responsible for any damage to computer equipment, personal property, or pets both domestic & exotic*
 
-It was succesful if you see *running* status for 3 pods.
-
->- You've deployed your first **pod**!  That's great stuff.  [Pods](https://kubernetes.io/docs/concepts/workloads/pods/) are simply discrete, deployable 'units'.  They can be in a group of one or more with shared ambitions... life goals... and shared storage/network resources.
->- It might take a bit for Helm to deploy everything!  Hang tight.
->- If you see an error message or if your computer spontaneously catches fire... there is a *tiny* chance something went wrong.  *SuchCodeWow and its affiliates are not responsible for any damage to computer equipment, personal property, or household pets both domestic & exotic*
-
-:memo: It makes a lot of sense to think dropping the namespace part (-n xx) from the command would be a quick way to simply show all pods.  If you are thinking that- You're awesome!  You can make good inferences and employee logic effectively.  Too bad you're completely and utterly wrong.  Kubernetes doesn't have time for logic or making any sense.  You have to use `kubectl get pods -A` to show everything.  Don't stress it when you miss the -A and wonder why all of your work so far disappeared!
+:memo: It makes a lot of sense to think dropping the namespace part (-n xx) from the command would be a quick way to simply show everything.  If you are thinking that- You're awesome!  You can make good inferences and employee logic effectively.  Too bad you're completely, utterly wrong.  Kubernetes doesn't have time for logic or making any sense.  You have to use `kubectl get pods -A` to show everything.  Don't stress it when you miss the -A and wonder why all of your work so far disappeared!
 
 ## Install Rancher ( yeehaw! )
 
-If you were feeling rebellious earlier and used a different DNS name in the hosts file during step 1 remember to replace the default value after *hostname=* shown here.
+If you were feeling rebellious earlier and used a different DNS name in the hosts file, remember to replace the default here.
 
 ```bash
 helm install rancher rancher-latest/rancher \
@@ -92,19 +98,9 @@ helm install rancher rancher-latest/rancher \
 
 ### :checkered_flag: CHECKPOINT
 
-You can watch the deployment of Rancher with this command.
+you can watch the deployment of Rancher with `kubectl -n cow-herder rollout status deploy/rancher`.  Hang tight moving forward until it's finished.
 
-```bash
-kubectl -n cow-herder rollout status deploy/rancher
-```
-
-Hang tight moving forward until it's finished.
-
-Check that the ingress has been setup.
-
-```bash
-kubectl -n cow-herder get ingresses
-```
+Check that the ingress has been setup.  Run `kubectl -n cow-herder get ingresses`.
 
 Look for *deployment "rancher" successfully rolled out*.
 

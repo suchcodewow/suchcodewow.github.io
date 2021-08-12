@@ -14,31 +14,84 @@ These steps will add microK8s kubernetes to your bowl.  You should already have 
 Login to your ubuntu computer.  
 If you used **multipass**, login via `multipass shell DTkube`.
 
+### install snap core
+
+```bash
+sudo snap install core
+```
+
+> snap is a standard ubuntu installer.  If you don't have it, check out the [snap docs](https://snapcraft.io/docs/installing-snapd?_ga=2.268412426.506881216.1628521158-685084332.1628085001){:target="_blank"}.
+
 ### Install microK8s
+
+Install microk8s using snap.
 
 ```bash
 sudo snap install microk8s --classic
 ```
 
-> snap is a standard ubuntu installer.  If you don't have it, check out the [snap docs](https://snapcraft.io/docs/installing-snapd?_ga=2.268412426.506881216.1628521158-685084332.1628085001){:target="_blank"}.
-> The command above installs microK8s.
-
-### :checkered_flag: CHECKPOINT
-
-Run `sudo microk8s kubectl get nodes` and hang tight until you see a 'ready' response for your control-plane.
-
-### Create namespaces
-
-We'll create a few namespaces to organize kubernetes.  We'll use these over the upcoming steps to keep everything tidy.
+Create a folder to save your KUBE config.
 
 ```bash
-sudo microk8s kubectl create ns cert-manager
-sudo microk8s kubectl create ns cow-herder
+mkdir ~/.kube
 ```
 
-### :checkered_flag: CHECKPOINT
+> The ~ tells linux to add the kube folder to your home directory.  Kubernetes will look here as a default location for your configuration later.
 
-Take a moment to revel in the glory of your organization with `sudo microk8s kubectl get ns` to see the spaces you've setup.  You'll see several system-generated namespaces in there along with the ones you've created.
+Set permission toallow your account only (this prevents security warnings later).
+
+```bash
+chmod -R 700  ~/.kube
+```
+
+>- **-R** will update permissions for the folder and anything it contains.  (Just in case there was anything in that folder.)
+>- **700** tells linux to give you full control and deny access at the group and 'all' levels.
+
+### Setup Kubernetes
+
+Grant your account access to microk8s.
+
+```bash
+sudo usermod -a -G microk8s $USER
+```
+
+> This command adds you ($USER) to the kubernetes group giving you permission to manage the installation.  To pick up these changes, you'll need to `logout` of ubuntu and log in again.
+
+
+
+### Install kubectl
+
+Download kubectl.
+
+```bash
+curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+```
+
+Install.
+
+```bash
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+```
+
+> kubecontrol is the controller manager for kubernetes.  We'll use it through the workshop for adding/changing the kubernetes installation.  Similar to before, curl downloads the software and launches a bash shell for installation.  
+
+## :checkered_flag: CHECKPOINT
+
+Run the following command to export your kubernetes config.
+
+```bash
+microk8s config > ~/.kube/config
+```
+
+> You should not receive any errors.  If you get a permissions error, ensure that you added yourself to the group above & also logged out and back in to pick up that group.
+
+Finally, use this command to test that kubernetes installed and is able to find your config.
+
+```bash
+kubectl get nodes -A
+```
+
+> You should get a response from kubernetes that your environment is in a Ready status.  If you get an error about contacting the server- check that you successfully exporting your kube config.
 
 ### Next Steps
 

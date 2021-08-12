@@ -3,7 +3,7 @@ title: Kubernetes & Dynatrace Workshop
 has_children: true
 ---
 
-### About
+## About
 
 Inspired by "create your own bowl" restaurants this Dynatrace & kubernetes workshop gives you the flexibility to create your own kubernetes environment from various ingredients to learn kubernetes, build a platform to demo Dynatrace in your organization, or both!  
 
@@ -15,9 +15,13 @@ No matter which path you take, you'll end up with:
 
 ![bowl overview](../assets/images/bowl.png)
 
+### What's the target audience?
+
+Anyone can use the end product to launch and use kubernetes.  But if you haven't used linux much or installed kubernetes before and are curious what's going on- this workshop is PERFECT for you!  Every command has notes about what is happening- even for linux in case you haven't used it very much before.
+
 ### Using this workshop
 
-There are a few common mechanics used throughout the workshop.
+There are a few common mechanics used.
 
 ```bash
 code blocks are meant to be typed (or hover for copy button)
