@@ -12,6 +12,13 @@ codeBlocks.forEach(function (codeBlock) {
   copyButton.addEventListener('click', function () {
     var code = codeBlock.querySelector('code').innerText.trim();
     window.navigator.clipboard.writeText(code);
+
+    copyButton.src = '/assets/images/check.png';
+    var fourSeconds = 4000;
+
+    setTimeout(function () {
+      copyButton.src = '/assets/images/copy.png';
+    }, fourSeconds);
   });
 });
 
