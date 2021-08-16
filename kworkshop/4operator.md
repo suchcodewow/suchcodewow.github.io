@@ -1,7 +1,7 @@
 ---
-title: Dynatrace via kubectl
+title: Dynatrace via cmd line
 description:
-parent: Step 4 (Pick 1)
+parent: Step 4 (Dynatrace)
 grand_parent: Kubernetes & Dynatrace Workshop
 ---
 
@@ -31,7 +31,8 @@ Get the configuration for Dynatrace.
 kubectl apply -f https://github.com/Dynatrace/dynatrace-operator/releases/latest/download/kubernetes.yaml
 ```
 
-> The **apply** command in kubernetes creates and manages resources following a yaml file.  It's a common way to add & configure a number of components at once.
+> The **apply** command in kubernetes creates and manages resources following a yaml file.  It's a common way to add & configure a number of components at once.  
+> a **yaml** (Yaml Ain't Markup Language) file is a text file format designed to be easy to write and read later.  It's powerful and simple- but does require the writer to pay attention to tabs and spacing.  The writer should also be prepared to cry at times when they need to get something done quickly and the format is being extra persnickety.
 
 (Optional) Watch the deployment as it progresses.
 
@@ -49,7 +50,7 @@ Once the deployment is finished- use the API_TOKEN and PAAS_TOKEN you created in
 kubectl -n dynatrace create secret generic dynakube --from-literal="apiToken=API_TOKEN" --from-literal="paasToken=PAAS_TOKEN"
 ```
 
-> This command **creates** a new [secret](https://kubernetes.io/docs/concepts/configuration/secret/) named **dynakube** (used later!) that allows kubernetes to establish a connection to your Dyantrace tenant.
+> This command **creates** a new [secret](https://kubernetes.io/docs/concepts/configuration/secret/) named **dynakube** (used shortly) that allows kubernetes to establish a connection to your Dyantrace tenant.
 
 Next we need to configure options.  Download a template to follow:
 
@@ -77,6 +78,8 @@ Awesome!  Almost there.  Now we need to apply our customization:
 ```bash
 kubectl apply -f cr.yaml
 ```
+
+You should see a response simliar to *dynakube.dyntrace.com/dynakube created*.
 
 ### Next Steps
 

@@ -1,7 +1,7 @@
 ---
 title: MicroK8s
 description:
-parent: Step 2 (Pick 1)
+parent: Step 2 (kubernetes)
 grand_parent: Kubernetes & Dynatrace Workshop
 ---
 
@@ -92,6 +92,18 @@ kubectl get nodes -A
 ```
 
 > You should get a response from kubernetes that your environment is in a Ready status.  If you get an error about contacting the server- check that you successfully exporting your kube config.
+
+### Recycling this ingredient
+
+Run the commands below to remove kubernetes.
+
+```bash
+microk8s reset
+```
+
+```bash
+sudo snap remove microk8s
+```
 
 ### Next Steps
 

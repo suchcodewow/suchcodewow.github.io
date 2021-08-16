@@ -18,7 +18,7 @@ kubectl create ns cert-manager
 kubectl create ns cow-herder
 ```
 
-### :checkered_flag: CHECKPOINT
+## :checkered_flag: CHECKPOINT
 
 Take a moment to revel in the glory of your organization with `kubectl get ns` to see the spaces you've setup.  You'll see several system-generated namespaces in there along with the ones you've created.
 
@@ -77,7 +77,7 @@ cert-manager jetstack/cert-manager \
 >- **version** allows us to specify a specific chart version.
 >- **set** specifies additional options for Helm to process (not always needed).
 
-### :checkered_flag: CHECKPOINT
+## :checkered_flag: CHECKPOINT
 
 Confirm it worked with `kubectl get pods -n cert-manager`.  Looking for a *running* status.
 
@@ -96,7 +96,7 @@ helm install rancher rancher-latest/rancher \
 --set hostname=rancher.localdev
 ```
 
-### :checkered_flag: CHECKPOINT
+## :checkered_flag: CHECKPOINT
 
 you can watch the deployment of Rancher with `kubectl -n cow-herder rollout status deploy/rancher`.  Hang tight moving forward until it's finished.
 
@@ -108,7 +108,7 @@ Look for *deployment "rancher" successfully rolled out*.
 >- **ingress** is a term for an external route into your kubernetes environment.  An ingress can handle any number of routing rules and distribute traffic for any number of application types.
 >- **traefik** is the default ingress controller with k3s.  There are a variety of other options like nginx, F5, and offerings from cloud providers.  Checking out some of them are great next steps after you build your bowl.
 
-### :checkered_flag: CHECKPOINT
+## :checkered_flag: CHECKPOINT
 
 Navigate to [http://rancher.localdev](http://rancher.localdev){:target="_blank"} in your browser.  Pick an admin password and, for simplicity, you can check the box on the right indicating this will be the only cluster managed.
 

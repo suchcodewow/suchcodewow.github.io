@@ -1,7 +1,7 @@
 ---
 title: Dynatrace via Helm
 description:
-parent: Step 4 (Pick 1)
+parent: Step 4 (Dynatrace)
 grand_parent: Kubernetes & Dynatrace Workshop
 ---
 

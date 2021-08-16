@@ -1,7 +1,7 @@
 ---
 title: Cloud Hosted
 description: 
-parent: Step 1 (Pick 1)
+parent: Step 1 (host)
 grand_parent: Kubernetes & Dynatrace Workshop
 ---
 

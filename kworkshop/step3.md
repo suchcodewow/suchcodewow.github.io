@@ -17,7 +17,7 @@ kubectl create ns cert-manager
 kubectl create ns cow-herder
 ```
 
-### :checkered_flag: CHECKPOINT
+## :checkered_flag: CHECKPOINT
 
 Take a moment to revel in the glory of your organization with `kubectl get ns` to see the spaces you've setup.  You'll see several system-generated namespaces in there along with the ones you've created.
 
@@ -64,7 +64,7 @@ cert-manager jetstack/cert-manager \
 >- **version** allows us to specify a specific chart version.
 >- **set** specifies additional options for Helm to process (not always needed).
 
-### :checkered_flag: CHECKPOINT
+## :checkered_flag: CHECKPOINT
 
 Confirm it worked.
 
@@ -74,11 +74,11 @@ kubectl get pods -n cert-manager
 
 It was succesful if you see *running* status for 3 pods.
 
->- You've deployed your first **pod**!  That's great stuff.  [Pods](https://kubernetes.io/docs/concepts/workloads/pods/) are simply discrete, deployable 'units'.  They can be in a group of one or more with shared ambitions... life goals... and shared storage/network resources.
+>- You've deployed your first **pod**!  That's great stuff.  [Pods](https://kubernetes.io/docs/concepts/workloads/pods/) are discrete, deployable 'units'.  They can be alone or in a group all sharing ambitions... life goals... and shared storage/network resources.
 >- It might take a bit for Helm to deploy everything!  Hang tight.
 >- If you see an error message or if your computer spontaneously catches fire... there is a *tiny* chance something went wrong.  *SuchCodeWow and its affiliates are not responsible for any damage to computer equipment, personal property, or household pets both domestic & exotic*
 
-:memo: It makes a lot of sense to think dropping the namespace part (-n xx) from the command would be a quick way to simply show all pods.  If you are thinking that- You're awesome!  You can make good inferences and employee logic effectively.  Too bad you're completely and utterly wrong.  Kubernetes doesn't have time for logic or making any sense.  You have to use `kubectl get pods -A` to show everything.  Don't stress it when you miss the -A and wonder why all of your work so far disappeared!
+:memo: It makes a lot of sense to think dropping the namespace part (-n xx) from the command would be a quick way to simply show all pods.  If you are thinking that- You're awesome!  You can make good inferences and employee logic effectively.  Too bad you're completely and utterly wrong.  Kubernetes doesn't have time for logic or making any sense.  You have to use `kubectl get pods -A` to show everything.  Don't worry if you miss the -A and it suddenly looks like all of your hard work so far disappeared!
 
 ## Install Rancher ( yeehaw! )
 
@@ -90,9 +90,20 @@ helm install rancher rancher-latest/rancher \
 --set hostname=rancher.localdev
 ```
 
-### :checkered_flag: CHECKPOINT
+## :checkered_flag: CHECKPOINT
 
 You can watch the deployment of Rancher with this command.
+
+```bash
+kubectl get deploy -A
+```
+
+> In the results list, you should see *rancher* in your *cow-herder* namespace. If you run the command a few times eventually you should see *3/3* under **ready**.
+>
+>- The **get** command displays resources for a given name or namespace.
+>- **Resources** are collections of objects.  They can be running workloads (pods) or less tangible objects like this *deploy* activity.  Kubernetes has lots.  Applying configurations can add more.  Run `kubectl api-resources' if you enjoy watching enormous lists scroll by on your screen.
+
+You can also check the status of the *deploy rancher* activity directly.
 
 ```bash
 kubectl -n cow-herder rollout status deploy/rancher
@@ -112,7 +123,7 @@ Look for *deployment "rancher" successfully rolled out*.
 >- **ingress** is a term for an external route into your kubernetes environment.  An ingress can handle any number of routing rules and distribute traffic for any number of application types.
 >- **traefik** is the default ingress controller with k3s.  There are a variety of other options like nginx, F5, and offerings from cloud providers.  Checking out some of them are great next steps after you build your bowl.
 
-### :checkered_flag: CHECKPOINT
+## :checkered_flag: CHECKPOINT
 
 Navigate to [http://rancher.localdev](http://rancher.localdev){:target="_blank"} in your browser.  Pick an admin password and, for simplicity, you can check the box on the right indicating this will be the only cluster managed.
 

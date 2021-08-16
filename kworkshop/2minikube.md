@@ -1,8 +1,9 @@
 ---
 title: MiniKube
 description:
-parent: Step 2 (Pick 1)
+parent: Step 2 (kubernetes)
 grand_parent: Kubernetes & Dynatrace Workshop
+nav_exclude: true
 ---
 
 ## minikube
@@ -120,5 +121,26 @@ kubectl get nodes -A
 ### Next Steps
 
 If kubernetes is up and running, Congratulations!  You're well on your way to a full-featured installation.  Let's add **Rancher** in [Step 3](step3).
+
+### Recycling this ingredient
+
+To remove minikube:
+
+```bash
+minikube stop
+minikube delete
+rm -r ~/.kube ~/.minikube
+sudo rm /usr/local/bin/localkube /usr/local/bin/minikube
+systemctl steop '*kubelet*.mount'
+sudo rm -rf /etc/kubernetes/
+```
+
+Remove docker:
+
+```bash
+docker system prune -af --volumes
+sudo apt-get purge docker-ce docker-ce-cli containerd.io
+sudo rm -rf /var/llib docker /var/lib/containerd
+```
 
 <script src="{{ base.url | prepend: site.url }}/assets/js/copy.js"></script>

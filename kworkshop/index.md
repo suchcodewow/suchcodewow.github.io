@@ -15,9 +15,13 @@ No matter which path you take, you'll end up with:
 
 ![bowl overview](../assets/images/bowl.png)
 
+### What's the big deal with kubernetes?
+
+Kubernetes is an open-source platform for deploying containerized workloads and services.  If you're familiar with VMware it's a similar concept.  But instead of one host running many servers, Kubernetes runs many applications in small containers isolated from each other on one server.  While containers themselves aren't new (Docker is a common example) Kubernetes can manage large quanitites of containers easily.  Automation lives at the heart of Kubernetes and makes it incredibly easy for developers to get applications up and running.  Kubernetes environments expand very quickly though because of the ease of use and quick delivery.  You'll see how Dynatrace is the only solution that makes the automation in Kubernetes to instantly establish intelligent observability and A.I. assisted monitoring.
+
 ### What's the target audience?
 
-Anyone can use the end product to launch and use kubernetes.  But if you haven't used linux much or installed kubernetes before and are curious what's going on- this workshop is PERFECT for you!  Every command has notes about what is happening- even for linux in case you haven't used it very much before.
+Anyone can use the end product to launch and use kubernetes.  If you haven't used linux or kubernetes before and are curious what's going on- this workshop is PERFECT for you!  Every command has notes about what is happening- even for linux in case you haven't used it very much before.
 
 ### Using this workshop
 
