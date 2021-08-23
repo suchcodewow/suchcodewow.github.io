@@ -75,6 +75,6 @@ Hosts file example:
 
 If you can log in to your new host, Congratulations!  You've completed step 1.  Check out next steps in building your bowl [here](./step2).
 
-## Recyling your bowl
+### Recyling your bowl
 
 For any of the cloud hosting options listed here, you can simply shut down & remove the vm.  After a period of inactivty, Dynatrace will archive the system automatically.

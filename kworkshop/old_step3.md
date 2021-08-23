@@ -15,7 +15,7 @@ We'll create a few namespaces to organize kubernetes.  We'll use these over the 
 
 ```bash
 kubectl create ns cert-manager
-kubectl create ns cow-herder
+kubectl create ns cattle-system
 ```
 
 ## :checkered_flag: CHECKPOINT
@@ -92,15 +92,15 @@ If you were feeling rebellious earlier and used a different DNS name in the host
 
 ```bash
 helm install rancher rancher-latest/rancher \
---namespace cow-herder \
+--namespace cattle-system \
 --set hostname=rancher.localdev
 ```
 
 ## :checkered_flag: CHECKPOINT
 
-you can watch the deployment of Rancher with `kubectl -n cow-herder rollout status deploy/rancher`.  Hang tight moving forward until it's finished.
+you can watch the deployment of Rancher with `kubectl -n cattle-system rollout status deploy/rancher`.  Hang tight moving forward until it's finished.
 
-Check that the ingress has been setup.  Run `kubectl -n cow-herder get ingresses`.
+Check that the ingress has been setup.  Run `kubectl -n cattle-system get ingresses`.
 
 Look for *deployment "rancher" successfully rolled out*.
 

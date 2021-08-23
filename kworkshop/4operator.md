@@ -7,15 +7,7 @@ grand_parent: Kubernetes & Dynatrace Workshop
 
 ## Dynatrace via kubectl
 
-### :exclamation: Important Note
-
-You'll see command line instructions on this step with multiple options depending on which kubernetes you picked in the previous step.  Select your distribution below:  
-
-example:
-
-```bash
-kubectl get nodes
-```
+In this step we'll use the command line to install the Dynatrace Operator.
 
 ### Deploy Dynatrace
 

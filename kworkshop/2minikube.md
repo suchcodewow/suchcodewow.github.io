@@ -8,6 +8,8 @@ nav_exclude: true
 
 ## minikube
 
+This installation type is deprecated.  Please use one of the other 2 methods to ensure compatibility in the workshop.
+
 These steps will add minikube kubernetes to your bowl.  You should already have an ubuntu 20.04 server running from [step 1](step1).
 
 ### Login to your ubuntu server

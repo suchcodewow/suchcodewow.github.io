@@ -28,7 +28,7 @@ div.highlight {
     background-color: #282c34;
     margin: 12px;
 }
-code::before {
+pre > code::before {
     content: "$ ";
     color:rgb(36, 206, 65)
 }
