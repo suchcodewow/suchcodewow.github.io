@@ -7,7 +7,7 @@ grand_parent: Kubernetes & Dynatrace Workshop
 
 ## microK8s
 
-These steps will add microK8s kubernetes to your bowl.  You should already have an ubuntu 20.04 server running from [step 1](step1).
+These steps will add microK8s kubernetes to your bowl.  You should already have an ubuntu server running from [step 1](step1).
 
 ### Login to your ubuntu server
 
@@ -46,7 +46,30 @@ Grant your account access to microk8s.
 sudo usermod -a -G microk8s $USER
 ```
 
-> This command adds you ($USER) to the kubernetes group giving you permission to manage the installation.  To pick up these changes, you'll need to `logout` of ubuntu and log in again.
+> This command adds your account `$USER` to the kubernetes permissions group.  
+> To pick up these changes, `logout` of ubuntu and log in again.
+
+### Microk8s addons
+
+Enable key addons.
+
+```bash
+microk8s.enable ingress dns registry storage helm3
+```
+
+### Setup shortcuts
+
+Create an alias for kubectl.
+
+```bash
+sudo snap alias microk8s.kubectl kubectl
+sudo snap alias microk8s.kubectl k
+sudo snap alias microk8s.helm3 helm
+```
+
+> `alias` gives you shortcuts to commonly used commands. 
+> `kubectl` is the main tool used to make changes in kubernetes.
+> `helm` is a popular orchestration tool for kubernetes.
 
 ### Install kubectl
 

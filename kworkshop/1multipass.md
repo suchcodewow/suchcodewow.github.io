@@ -9,7 +9,7 @@ grand_parent: Kubernetes & Dynatrace Workshop
 
 ### Download and Install **Multipass** using the defaults
 
-[Download on MAC](https://multipass.run/download/macos) [Download on PC](https://multipass.run/download/windows)
+[Download on MAC](https://multipass.run/download/macos) or  [Download on PC](https://multipass.run/download/windows)
 
 > **Multipass** lets us run a virtual Ubuntu Linux server locally.
 
@@ -22,7 +22,7 @@ multipass launch -c 4 -m 4G -d 64GB -n DTkube
 ```
 
 > This creates an ubuntu server that can use 4 cores, 4 GB of memory, and is named DTkube.  
-> The **-d 64GB** command allocates maximum hard disk size.  Multipass will only use space consumed by the ubuntu server's files & you won't actually use up 64GB of space on your computer.
+> The `-d 64GB` command allocates maximum hard disk size.  Multipass will only use space consumed by the ubuntu server's files & you won't actually use up 64GB of space on your computer.
 
 ### Get the IP address of your new server
 

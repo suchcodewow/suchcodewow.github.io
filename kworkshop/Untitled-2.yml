@@ -1,0 +1,194 @@
+  #!/bin/bash -x
+  
+  # The minimal to have a full keptn working
+  # with exposed istio and keptn over nginx
+  update_ubuntu=true
+  docker_install=true
+  microk8s_install=true
+  enable_k8dashboard=true
+
+  setup_proaliases=truemicr
+  istio_install=true
+  keptn_install=true
+  helm_install=true
+  keptn_examples_clone=true
+  resources_clone=true
+
+  dynatrace_savecredentials=true
+  dynatrace_configure_monitoring=true
+
+  expose_kubernetes_api=true
+  expose_kubernetes_dashboard=true
+
+  keptndeploy_homepage=true
+
+  selected_bundle="installationBundleKeptnOnly"
+
+#### Installation steps below
+
+  updateUbuntu
+      apt update
+  setupProAliases
+
+  dependenciesInstall
+      apt install snapd -y
+      apt install git -y
+      apt install jq -y
+  dockerInstall
+      apt install docker.io -y
+      service docker start
+  microk8sInstall
+      snap install microk8s --channel=$MICROK8S_CHANNEL --classic
+      bash -c "echo \"--allow-privileged=true\" >> /var/snap/microk8s/current/args/kube-apiserver"
+      ALT: echo --allow-privileged=true | sudo tee -a /var/snap/microk8s/current/args/kube-apiserver
+      usermod -a -G microk8s $USER
+      iptables -P FORWARD ACCEPT (NOT needed?)
+      ufw allow in on cni0 && sudo ufw allow out on cni0
+      ufw default allow routed
+      snap alias microk8s.kubectl kubectl
+      sed -i 's~/usr/bin:~/usr/bin:/snap/bin:~g' /etc/environment
+  microk8sStart
+  bashas 'microk8s.start'
+  microk8sEnableBasic
+    bashas 'microk8s.enable dns'
+  bashas 'microk8s.enable storage'
+  bashas 'microk8s.enable ingress'
+  microk8sEnableDashboard
+      bashas 'microk8s.enable dashboard'
+  microk8sEnableRegistry
+      bashas 'microk8s.enable registry'
+
+  istioInstall
+      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=$ISTIO_VERSION sh -
+    mv istio-$ISTIO_VERSION /opt/istio-$ISTIO_VERSION
+    chmod +x -R /opt/istio-$ISTIO_VERSION/
+    ln -s /opt/istio-$ISTIO_VERSION/bin/istioctl /usr/local/bin/istioctl
+    bashas "echo 'y' | istioctl install"
+  helmInstall
+    bashas 'microk8s.enable helm3'
+    snap alias microk8s.helm3 helm
+    bashas "helm repo add stable https://charts.helm.sh/stable"
+    bashas "helm repo add jenkins https://charts.jenkins.io"
+    bashas "helm repo add gitea-charts https://dl.gitea.io/charts/"
+    bashas "helm repo update"
+  certmanagerInstall
+    bashas "kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v$CERTMANAGER_VERSION/cert-manager.yaml"
+    waitForAllPods
+  resourcesClone
+  keptnExamplesClone
+  dynatraceSaveCredentials
+
+  setupMagicDomainPublicIp
+    bashas "kubectl create configmap -n default domain --from-literal=domain=${DOMAIN}"
+
+  exposeK8Services
+    cat $yaml.yaml | sed 's~domain.placeholder~'"$DOMAIN"'~' > ./gen/$yaml.yaml
+    kubectl apply -f gen/$yaml.yaml
+  patchKubernetesDashboard
+  keptnInstall
+  keptnDeployHomepage
+    kubectl -n default create deploy homepage --image=shinojosa/kiab:0.8
+    kubectl -n default expose deploy homepage --port=80 --type=NodePort
+    bashas "cd $KEPTN_IN_A_BOX_DIR/resources/ingress && bash create-ingress.sh ${DOMAIN} homepage"
+
+
+baremetal ingress controller maybe: kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.0/deploy/static/provider/baremetal/deploy.yaml
+
+## the contents of create-ingress.yaml
+  if [ $# -eq 2 ]; then
+    # Read JSON and set it in the CREDS variable 
+    DOMAIN=$1
+    yaml=$2
+    echo "Creating Ingress $yaml.yaml for $DOMAIN"
+elif  [ $# -eq 1 ]; then
+    yaml=$1
+    echo "No Domain has been passed, getting it from the ConfigMap"
+    DOMAIN=$(kubectl get configmap domain -n default -ojsonpath={.data.domain})
+    echo "Domain: $DOMAIN"
+    echo "Creating Ingress $yaml.yaml for $DOMAIN"
+else
+    echo "usage expose.sh DOMAIN yamlfilename"
+    echo "usage expose.sh yamlfilename"
+    exit
+fi
+
+cat $yaml.yaml | sed 's~domain.placeholder~'"$DOMAIN"'~' > ./gen/$yaml.yaml
+
+kubectl apply -f gen/$yaml.yaml
+
+## k8s ingress
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: k8-api-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    #cert-manager.io/cluster-issuer: "letsencrypt" 
+spec:
+  rules:
+  - host: home.192.168.1.118.nip.io
+    http:
+      paths:
+      - backend:
+          serviceName: kubernetes
+          servicePort: 443
+        path: /
+  tls:
+  - hosts:
+    - home.192.168.1.118.nip.io
+    #secretName: k8-api-tls
+
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  name: helloworld
+  namespace: default
+spec:
+  rules:
+  - host: helloworld.192.168.1.118.nip.io
+    http:
+      paths:
+      - backend:
+          serviceName: home
+          servicePort: 80
+        path: /
+
+## THIS WORKS! (simple.yaml)
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: http-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: home
+          servicePort: 80
+
+#GITHUB EXAMPLE (alias.yaml)
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: delay
+  annotations:
+    nginx.ingress.kubernetes.io/server-alias: else.192.168.1.118.nip.io
+spec:
+  rules:
+  - host: home.192.168.1.118.nip.io
+    http:
+      paths:
+      - backend:
+          serviceName: home
+          servicePort: 80
+        path: /

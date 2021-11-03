@@ -11,6 +11,7 @@ codeBlocks.forEach(function (codeBlock) {
 
   copyButton.addEventListener('click', function () {
     var code = codeBlock.querySelector('code').innerText.trim();
+    code = code.concat("\n");
     window.navigator.clipboard.writeText(code);
 
     copyButton.src = '/assets/images/check.png';
